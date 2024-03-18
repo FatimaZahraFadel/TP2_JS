@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: red;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        input[type="text"], input[type="email"], textarea {
+            width:30%;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+
+        .button {
+            border: 2px solid black;
+            background-color: white;
+            color: black;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            transition-duration: 0.4s;
+        }
+
+        .button:hover {
+            background-color: black;
+            color: white;
+        }
+
+        #menu {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 120px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        #menu a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        #menu a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .menuTrigger {
+            height: 200px;
+            width: 200px;
+            border: 2px solid black;
+            cursor: pointer;
+            padding: 10px;
+            text-align: center;
+            line-height: 180px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Exo1</h2>
+        <input type="text" id="num1" placeholder="Entrez le premier nombre">
+        <input type="text" id="num2" placeholder="Entrez le deuxième nombre">
+        <button class="button" onclick="addition()">Additionner</button>
+        <span id="resultat1"></span> <br><br><br>
+
+        <h2>Exo2</h2>
+        <input type="text" id="num3" placeholder="Entrez le nombre">
+        <input type="text" id="num4" placeholder="Entrez le nombre">
+        <button class="button" onclick="permuter()">Permuter</button><br><br><br>
+
+        <h2>Exo3</h2>
+        <input type="text" id="num5" placeholder="Entrez le premier nombre">
+        <input type="text" id="num6" placeholder="Entrez le deuxième nombre">
+        <label for="operation"><b>Choose an operation :</b></label>
+        <select id="operation" name="operation">
+            <option value="addition">+</option>
+            <option value="subtraction">-</option>
+            <option value="division">/</option>
+            <option value="multiplication">*</option>
+        </select>
+        <button class="button" onclick="calculer()">Calculer</button>
+        <span id="resultat2"></span> <br><br><br>
+
+        <h2>Exo4</h2>
+        <button class="button" onclick="saisir()">Saisir les nombres</button>
+        <br><br><br>
+
+        <h2>Exo5</h2>
+        <button class="button" onclick="insérer()">Insérer</button>
+        <span id="resultat3"></span> 
+        <br><br><br>
+
+        <h2>Exo6</h2>
+        <ul>
+            <li><label id="email_label"> Email :</label></li>
+            <input type="email" id="email"> <br>
+            <li><label id="obj_label"> Objet :</label></li>
+            <input type="text" id="obj"> <br>
+            <li><label id="corps_label"> Corps :</label></li>
+            <textarea id="corps"></textarea> <br>
+        </ul>
+        <button class="button" onclick="envoyer()">Envoyer</button>
+        <span id="resultat4"></span>
+
+        <br><br><br>
+
+        <h2>Exo7</h2>
+        <a href="https://exemple.com" onclick="return preventRedirection(event)" class="button">Lien avec redirection</a>
+
+        <div id="menuTrigger" class="menuTrigger">Cliquez ici pour afficher le menu</div>
+        <div id="menu">
+            <a href="#">Option 1</a>
+            <a href="#">Option 2</a>
+            <a href="#">Option 3</a>
+        </div>
+    </div>
+
+    <script>
+         //exo1
+         function addition() {
+            var num1 = parseFloat(document.getElementById("num1").value);
+            var num2 = parseFloat(document.getElementById("num2").value);
+            var resultat = num1 + num2;
+            document.getElementById("resultat1").innerText = "Le résultat de l'addition est : " + resultat;
+        }
+
+        //exo2
+        function permuter() {
+            var num3 = document.getElementById("num3").value;
+            var num4 = document.getElementById("num4").value;
+            var temp = num3;
+            num3 = num4;
+            num4 = temp;
+            document.getElementById("num3").value = num3;
+            document.getElementById("num4").value = num4;
+        }
+
+        //exo3
+        function calculer() {
+            var num5 = parseFloat(document.getElementById("num5").value);
+            var num6 = parseFloat(document.getElementById("num6").value);
+            var operation = document.getElementById("operation").value;
+            var resultat;
+
+            switch(operation) {
+                case "addition":
+                    resultat = num5 + num6;
+                    break;
+                case "subtraction":
+                    resultat = num5 - num6;
+                    break;
+                case "division":
+                    resultat = num5 / num6;
+                    break;
+                case "multiplication":
+                    resultat = num5 * num6;
+                    break;
+                default:
+                    resultat = "Opération non valide";
+            }
+
+            document.getElementById("resultat2").innerText = "Le résultat du calcul est : " + resultat;
+        }
+
+        //exo4
+        function saisir() {
+            var n1 = parseFloat(prompt("Veuillez entrer le premier nombre : "));
+            var n2 = parseFloat(prompt("Veuillez entrer le deuxième nombre : "));
+            var n3 = parseFloat(prompt("Veuillez entrer le troisième nombre : "));
+
+            if (!isNaN(n1) && !isNaN(n2) && !isNaN(n3)) {
+                if (n1 === n2 && n1 === n3) {
+                    alert("Les trois variables sont identiques.");
+                } else if (n1 === n2 || n1 === n3 || n2 === n3) {
+                    alert("Deux des variables sont de valeurs égales.");
+                } else {
+                    alert("Les trois variables sont différentes.");
+                }
+            }
+        }
+
+        //exo5
+        function insérer() {
+            var HT = parseFloat(prompt("Veuillez entrer le montant HT : "));
+            var TVA = parseFloat(prompt("Veuillez entrer le taux de TVA : "));
+
+            if (!isNaN(HT) && !isNaN(TVA)) {
+                var TTC = HT + (HT * TVA / 100);
+                document
+
+.getElementById("resultat3").innerText = "Le TTC est : " + TTC.toFixed(2);
+            }
+        }
+
+        //exo6
+        function envoyer() {
+            var email = document.getElementById("email").value;
+            var object = document.getElementById("obj").value;
+            var corps = document.getElementById("corps").value;
+
+            document.getElementById("resultat4").innerText = "Sender : " + email + ", Object : " + object + ", Corps : " + corps;
+        }
+
+        //exo7
+        function preventRedirection(event) {
+            event.preventDefault();
+            alert("Redirection interdite");
+        }
+
+        document.getElementById("menuTrigger").addEventListener('click',function(event){
+            document.getElementById("menu").style.display = "block";
+            document.getElementById("menuTrigger").addEventListener('mouseout',function(event){
+                document.getElementById("menu").style.display = "none";
+            })
+
+
+        })
+                
+
+
+      
+    </script>
+</body>
+</html>
